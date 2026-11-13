@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0,
+    maximum-scale=1.0, user-scalable=no">
+
+  <meta name="theme-color" content="#000000">
+  <title> </title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      touch-action: manipulation;
+    }
+
+    body {
+      position: fixed;
+      inset: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #screen {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      position: relative;
+    }
+
+    .exit-text {
+      position: absolute;
+      top: 35px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: .3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="screen">
+    <div class="exit-text">
+      Tap anywhere to exit
+    </div>
+  </div>
+
+  <audio id="sound" src="sound.mp3" preload="auto"></audio>
+
+  <script>
+    const screen = document.getElementById("screen");
+    const sound = document.getElementById("sound");
+
+    let started = false;
+
+    async function playSound() {
+      if (started) return;
+
+      started = true;
+
+      try {
+        await sound.play();
+      } catch (error) {
+        started = false;
+      }
+    }
+
+    screen.addEventListener("pointerdown", playSound);
+  </script>
+
+</body>
+</html>
